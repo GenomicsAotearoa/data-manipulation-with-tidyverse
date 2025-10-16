@@ -6,12 +6,21 @@ body, h1, h2, h3, h4, h5, h6, p, a, button, table, blockquote {
   font-family: 'Mukta', 'Roboto', sans-serif;
 }
 
-html, body {
+body {
   font-size: 20px;
   background-color: #F5FAFF;  /* pale blue background */
   color: #2E3440;             /* dark slate gray text */
   line-height: 1.6;
-  margin: 0;
+  margin: 60px;
+  padding: 0;
+}
+
+html {
+  font-size: 20px;
+  background-color: #F5FAFF;  /* pale blue background */
+  color: #2E3440;             /* dark slate gray text */
+  line-height: 1.6;
+  margin: 0px;
   padding: 0;
 }
 
@@ -135,3 +144,18 @@ blockquote {
   padding-top: 1.5rem;
   border-top: 1px solid #D7E3F4;
 }
+
+.workshop-banner {
+  position: fixed;       /* stays at top */
+  top: 0;               
+  left: 0;
+  width: 100%;          /* full width */
+  background-color: #00a1e5; /* your chosen blue */
+  color: white;          /* text in white for contrast */
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 10px 0;
+  z-index: 9999;        /* ensures it stays on top */
+}
+

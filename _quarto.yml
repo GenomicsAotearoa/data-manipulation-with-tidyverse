@@ -29,6 +29,7 @@ website:
 
 format:
   html:
+    include-before-body: banner.html
     code-tools: false
     code-block-bg: true
     code-block-title: true
