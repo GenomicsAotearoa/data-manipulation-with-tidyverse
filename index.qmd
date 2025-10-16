@@ -1,0 +1,29 @@
+---
+title: "Genomic data manipulation with tidyverse"
+format: html
+---
+
+[![](theme-images/tidyverse.png){width="50%" fig-align="center"}](https://tidyverse.org/)
+
+# What is this workshop about?
+
+
+# What this workshop does and does not cover:
+
+**Does:**  
+
+- tibbles  
+- dplyr filter() select() mutate() arrange() groupby
+
+
+**Does not:**
+
+- ggplot2 - see our ggplot2 workshop
+- string manipulation - see our other intermediate R workshop  
+
+
+# Set-up
+
+
+# Attribution
+

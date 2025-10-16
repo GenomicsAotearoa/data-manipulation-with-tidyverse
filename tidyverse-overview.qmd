@@ -1,0 +1,20 @@
+---
+title: ""
+format: html
+---
+
+
+# Introduction to the tidyverse
+
+```bash
+install.packages("tidyverse")
+```
+
+coherant system of packages for data manipulation, exploration and visualisation. All packages share an underlying design philosophy, grammar, and data structures.
+developed by hadley wickham 
+
+
+## tidyverse vs base R
+
+e.g., subsetting with square brackets, making new objects rather than passing through a pipe
+

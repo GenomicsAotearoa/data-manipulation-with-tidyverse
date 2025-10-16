@@ -1,0 +1,33 @@
+# plan for workshop
+
+genomic data manipulation
+
+at an "intermediate level", with intro R as a prereq.
+
+estimated to be a one day workshop, 10am-4pm
+
+should be designed parallel to viz w ggpolot2 (eg currently that has a section on perfume data that uses dplyr to manip data, can use and expand on that here) and parallel to any other of our workshops too (eg rnaseq, manipulatinmg tables going into DGE?)
+
+should focus on using genomic data
+-rnaseq
+-edna
+-variant calling/snps
+
+packages
+
+dplyr
+tibble
+readr
+tidyr
+stringr
+forcats
+lubridate
+purr
+
+native pipe vs maggrittr pipe - use native pipe for workshop. 
+
+short demno first with palmer penguins
+
+then move on to rnaseq dataset
+
+whrer do we want them to start? with a tidy daytaset already (a nice dataframe) or with a messy one and they habve to fix it? may at the edn they have an exervse putting ot all togther, they need to fix ie clean up an untidy dataframe, then asnwer a question or two and visualise it. can m aybe give three problems and solutions. 

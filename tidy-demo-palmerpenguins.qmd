@@ -1,0 +1,202 @@
+---
+title: ""
+format: html
+---
+
+# 🐧 Palmer Penguins demo using `dplyr`
+
+The **`dplyr`** package provides a set of simple, consistent functions for manipulating data frames.
+
+We’ll explore some of the most common ones for choosing columns, rows and grouping variables to perform summary statistics.
+
+---
+
+## Load data
+
+```{r}
+#| message: false
+
+library(dplyr)
+library(palmerpenguins)
+head(penguins)
+```
+
+```{r}
+# Optional: force penguins to appear in your environment:
+penguins <- penguins
+```
+
+
+## what are tibbles?
+
+stuff goes here!
+
+## Select columns
+
+Columns use `select()` function
+
+```{r}
+penguins |>
+  select(species, island, body_mass_g)
+```
+
+## Filter rows
+
+Rows use `filter()` function
+
+
+```{r}
+penguins |>
+  filter(body_mass_g > 4000)
+```
+
+## create new columns 
+
+```{r}
+penguins |>
+  mutate(body_mass_kg = body_mass_g / 1000)
+```
+
+## summarise and group by
+
+tend to use together
+
+`group_by()` doesn’t change the data immediately — it just tells R how to organise it.
+
+first this is what group by does
+
+```{r}
+penguins_grouped <- penguins |>
+  group_by(species)
+penguins_grouped
+```
+
+then this is summarise:
+
+```{r}
+penguins_grouped |>
+  summarise(
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    mean_mass = mean(body_mass_g, na.rm = TRUE),
+    n = n()
+  )
+```
+
+In practice, you’ll often combine them in one pipeline:
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarise(
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    mean_mass = mean(body_mass_g, na.rm = TRUE)
+  )
+```
+
+## Putting it all together
+
+Above we did each manipulation step by step. But eh beauty of dplyr and using teh pipe is puttign it altogether in one line of code.
+
+Allows us to avoid making a new object for each step.
+
+```{r}
+# Select only relevant columns
+# Filter to include only penguins heavier than 4000 g
+# Create a new column converting grams to kilograms
+# Group data by species
+# Summarise the grouped data
+
+penguins |>
+  select(species, island, flipper_length_mm, body_mass_g) |> 
+  filter(body_mass_g > 4000) |>   
+  mutate(body_mass_kg = body_mass_g / 1000) |> 
+  group_by(species) |>   
+  summarise(
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),
+    n = n()
+  )   
+```
+
+Lastly, lets visualise it!
+
+```{r}
+library(ggplot2)
+
+penguins_summary <- penguins |>
+  select(species, island, flipper_length_mm, body_mass_g) |> 
+  filter(body_mass_g > 4000) |>   
+  mutate(body_mass_kg = body_mass_g / 1000) |> 
+  group_by(species) |>   
+  summarise(
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),
+    n = n()
+  )
+
+ggplot(penguins_summary, aes(x = species, y = mean_mass_kg, fill = species)) +
+  geom_col() +
+  labs(title = "Mean body mass of penguins by species",
+       y = "Mean body mass (kg)", x = "Species") +
+  theme_minimal()
+```
+
+
+### Add error bars
+
+Our bar plot looks ok, but we don't have any error bars. Lets do some more data manipulation to get standard deviation and standard error. 
+
+Note, we need to use our original penguins dataset here, as we are goign to calucate the.... 
+
+```{r}
+penguins_summary_stats <- penguins |>
+  select(species, island, flipper_length_mm, body_mass_g) |> 
+  filter(body_mass_g > 4000) |>   
+  mutate(body_mass_kg = body_mass_g / 1000) |> 
+  group_by(species) |>   
+  summarise(
+    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),
+    sd_mass_kg   = sd(body_mass_kg, na.rm = TRUE),   # standard deviation
+    n            = n(),
+    se_mass_kg   = sd_mass_kg / sqrt(n)             # standard error
+  )
+```
+
+Now replot:
+
+```{r}
+ggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = mean_mass_kg - se_mass_kg,
+                    ymax = mean_mass_kg + se_mass_kg),
+                width = 0.2) +  # width of error bar caps
+  labs(title = "Mean Body Mass of Penguins with SE",
+       y = "Mean Body Mass (kg)", x = "") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+::: {.callout-note collapse="true" appearance="simple"}
+# Plot with SD instead
+
+```{r}
+ggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = mean_mass_kg - sd_mass_kg,
+                    ymax = mean_mass_kg + sd_mass_kg),
+                width = 0.2) +  # width of error bar caps
+  labs(title = "Mean Body Mass of Penguins with SD",
+       y = "Mean Body Mass (kg)", x = "") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+:::
+
+# Summary of key dplyr functions
+
+- `select()` = choose **columns** (variables)
+- `filter()` = choose **rows** (observations) that meet a condition
+- `mutate()` = create or modify **columns**
+- `group_by()` = define **groups** for summarising
+- `summarise()` = calculate **summary statistics** per group

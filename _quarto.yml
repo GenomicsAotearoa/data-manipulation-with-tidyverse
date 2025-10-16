@@ -1,0 +1,42 @@
+project: 
+  type: website
+  output-dir: docs
+
+website:
+  title: "Data manipulation with the tidyverse"
+  favicon: theme-images/GA-image-black-favicon.png
+  open-graph: true # https://quarto.org/docs/websites/website-tools.html#open-graph
+  sidebar:
+    style: "docked"
+    left:
+      - text: Home
+        href: index.qmd
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - text: "Tidyverse"
+        href: tidyverse-overview.qmd
+      - text: "Penguins tidy demo"
+        href: tidy-demo-palmerpenguins.qmd
+      - text: "RNAseq-data"
+        href: tidy-manipulation-rnaseq.qmd
+    
+    tools:
+      - icon: github
+        text: Github
+        href: https://github.com/GenomicsAotearoa/data-manipulation-with-tidyverse
+
+
+format:
+  html:
+    code-tools: false
+    code-block-bg: true
+    code-block-title: true
+    code-overflow: wrap
+    page-layout: full
+    toc: true
+    toc-depth: 4
+    css: styles.css
+    navigation: true
+    page-navigation: true
+

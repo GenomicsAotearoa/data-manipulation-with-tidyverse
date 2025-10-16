@@ -1,0 +1,22 @@
+---
+title: ""
+format: html
+---
+
+# RNAseq count manipulation
+
+```{r}
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+   # install.packages("BiocManager")
+#BiocManager::install("pasilla")
+```
+
+```{r}
+#| message: false
+library(pasilla)
+```
+
+```{r}
+
+
+```

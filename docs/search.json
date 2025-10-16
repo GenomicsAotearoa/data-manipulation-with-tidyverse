@@ -1,0 +1,122 @@
+[
+  {
+    "objectID": "tidyverse-overview.html",
+    "href": "tidyverse-overview.html",
+    "title": "Introduction to the tidyverse",
+    "section": "",
+    "text": "install.packages(\"tidyverse\")\ncoherant system of packages for data manipulation, exploration and visualisation. All packages share an underlying design philosophy, grammar, and data structures. developed by hadley wickham\n\n\ne.g., subsetting with square brackets, making new objects rather than passing through a pipe",
+    "crumbs": [
+      "Tidyverse"
+    ]
+  },
+  {
+    "objectID": "tidyverse-overview.html#tidyverse-vs-base-r",
+    "href": "tidyverse-overview.html#tidyverse-vs-base-r",
+    "title": "Introduction to the tidyverse",
+    "section": "",
+    "text": "e.g., subsetting with square brackets, making new objects rather than passing through a pipe",
+    "crumbs": [
+      "Tidyverse"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Genomic data manipulation with tidyverse",
+    "section": "",
+    "text": "What is this workshop about?\n\n\nWhat this workshop does and does not cover:\nDoes:\n\ntibbles\n\ndplyr filter() select() mutate() arrange() groupby\n\nDoes not:\n\nggplot2 - see our ggplot2 workshop\nstring manipulation - see our other intermediate R workshop\n\n\n\nSet-up\n\n\nAttribution",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "tidy-manipulation-rnaseq.html",
+    "href": "tidy-manipulation-rnaseq.html",
+    "title": "RNAseq count manipulation",
+    "section": "",
+    "text": "RNAseq count manipulation\n\n#if (!requireNamespace(\"BiocManager\", quietly = TRUE))\n   # install.packages(\"BiocManager\")\n#BiocManager::install(\"pasilla\")\n\n\nlibrary(pasilla)",
+    "crumbs": [
+      "RNAseq-data"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html",
+    "href": "tidy-demo-palmerpenguins.html",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "The dplyr package provides a set of simple, consistent functions for manipulating data frames.\nWe’ll explore some of the most common ones for choosing columns, rows and grouping variables to perform summary statistics.\n\n\n\n\nlibrary(dplyr)\nlibrary(palmerpenguins)\nhead(penguins)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n# Optional: force penguins to appear in your environment:\npenguins &lt;- penguins\n\n\n\n\nstuff goes here!\n\n\n\nColumns use select() function\n\npenguins |&gt;\n  select(species, island, body_mass_g)\n\n# A tibble: 344 × 3\n   species island    body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;           &lt;int&gt;\n 1 Adelie  Torgersen        3750\n 2 Adelie  Torgersen        3800\n 3 Adelie  Torgersen        3250\n 4 Adelie  Torgersen          NA\n 5 Adelie  Torgersen        3450\n 6 Adelie  Torgersen        3650\n 7 Adelie  Torgersen        3625\n 8 Adelie  Torgersen        4675\n 9 Adelie  Torgersen        3475\n10 Adelie  Torgersen        4250\n# ℹ 334 more rows\n\n\n\n\n\nRows use filter() function\n\npenguins |&gt;\n  filter(body_mass_g &gt; 4000)\n\n# A tibble: 172 × 8\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.2          19.6               195        4675\n 2 Adelie  Torgersen           42            20.2               190        4250\n 3 Adelie  Torgersen           34.6          21.1               198        4400\n 4 Adelie  Torgersen           42.5          20.7               197        4500\n 5 Adelie  Torgersen           46            21.5               194        4200\n 6 Adelie  Dream               39.2          21.1               196        4150\n 7 Adelie  Dream               39.8          19.1               184        4650\n 8 Adelie  Dream               44.1          19.7               196        4400\n 9 Adelie  Dream               39.6          18.8               190        4600\n10 Adelie  Dream               42.3          21.2               191        4150\n# ℹ 162 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n\n\n\npenguins |&gt;\n  mutate(body_mass_kg = body_mass_g / 1000)\n\n# A tibble: 344 × 9\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.1          18.7               181        3750\n 2 Adelie  Torgersen           39.5          17.4               186        3800\n 3 Adelie  Torgersen           40.3          18                 195        3250\n 4 Adelie  Torgersen           NA            NA                  NA          NA\n 5 Adelie  Torgersen           36.7          19.3               193        3450\n 6 Adelie  Torgersen           39.3          20.6               190        3650\n 7 Adelie  Torgersen           38.9          17.8               181        3625\n 8 Adelie  Torgersen           39.2          19.6               195        4675\n 9 Adelie  Torgersen           34.1          18.1               193        3475\n10 Adelie  Torgersen           42            20.2               190        4250\n# ℹ 334 more rows\n# ℹ 3 more variables: sex &lt;fct&gt;, year &lt;int&gt;, body_mass_kg &lt;dbl&gt;\n\n\n\n\n\ntend to use together\ngroup_by() doesn’t change the data immediately — it just tells R how to organise it.\nfirst this is what group by does\n\npenguins_grouped &lt;- penguins |&gt;\n  group_by(species)\npenguins_grouped\n\n# A tibble: 344 × 8\n# Groups:   species [3]\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.1          18.7               181        3750\n 2 Adelie  Torgersen           39.5          17.4               186        3800\n 3 Adelie  Torgersen           40.3          18                 195        3250\n 4 Adelie  Torgersen           NA            NA                  NA          NA\n 5 Adelie  Torgersen           36.7          19.3               193        3450\n 6 Adelie  Torgersen           39.3          20.6               190        3650\n 7 Adelie  Torgersen           38.9          17.8               181        3625\n 8 Adelie  Torgersen           39.2          19.6               195        4675\n 9 Adelie  Torgersen           34.1          18.1               193        3475\n10 Adelie  Torgersen           42            20.2               190        4250\n# ℹ 334 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\nthen this is summarise:\n\npenguins_grouped |&gt;\n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass = mean(body_mass_g, na.rm = TRUE),\n    n = n()\n  )\n\n# A tibble: 3 × 4\n  species   mean_flipper mean_mass     n\n  &lt;fct&gt;            &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;\n1 Adelie            190.     3701.   152\n2 Chinstrap         196.     3733.    68\n3 Gentoo            217.     5076.   124\n\n\nIn practice, you’ll often combine them in one pipeline:\n\npenguins |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass = mean(body_mass_g, na.rm = TRUE)\n  )\n\n# A tibble: 3 × 3\n  species   mean_flipper mean_mass\n  &lt;fct&gt;            &lt;dbl&gt;     &lt;dbl&gt;\n1 Adelie            190.     3701.\n2 Chinstrap         196.     3733.\n3 Gentoo            217.     5076.\n\n\n\n\n\nAbove we did each manipulation step by step. But eh beauty of dplyr and using teh pipe is puttign it altogether in one line of code.\nAllows us to avoid making a new object for each step.\n\n# Select only relevant columns\n# Filter to include only penguins heavier than 4000 g\n# Create a new column converting grams to kilograms\n# Group data by species\n# Summarise the grouped data\n\npenguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    n = n()\n  )   \n\n# A tibble: 3 × 4\n  species   mean_flipper mean_mass_kg     n\n  &lt;fct&gt;            &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;\n1 Adelie            195.         4.35    35\n2 Chinstrap         203.         4.27    15\n3 Gentoo            217.         5.09   122\n\n\nLastly, lets visualise it!\n\nlibrary(ggplot2)\n\npenguins_summary &lt;- penguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    n = n()\n  )\n\nggplot(penguins_summary, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  labs(title = \"Mean body mass of penguins by species\",\n       y = \"Mean body mass (kg)\", x = \"Species\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nOur bar plot looks ok, but we don’t have any error bars. Lets do some more data manipulation to get standard deviation and standard error.\nNote, we need to use our original penguins dataset here, as we are goign to calucate the….\n\npenguins_summary_stats &lt;- penguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    sd_mass_kg   = sd(body_mass_kg, na.rm = TRUE),   # standard deviation\n    n            = n(),\n    se_mass_kg   = sd_mass_kg / sqrt(n)             # standard error\n  )\n\nNow replot:\n\nggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean_mass_kg - se_mass_kg,\n                    ymax = mean_mass_kg + se_mass_kg),\n                width = 0.2) +  # width of error bar caps\n  labs(title = \"Mean Body Mass of Penguins with SE\",\n       y = \"Mean Body Mass (kg)\", x = \"\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlot with SD instead\n\n\n\n\n\n\nggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean_mass_kg - sd_mass_kg,\n                    ymax = mean_mass_kg + sd_mass_kg),\n                width = 0.2) +  # width of error bar caps\n  labs(title = \"Mean Body Mass of Penguins with SD\",\n       y = \"Mean Body Mass (kg)\", x = \"\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#load-data",
+    "href": "tidy-demo-palmerpenguins.html#load-data",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "library(dplyr)\nlibrary(palmerpenguins)\nhead(penguins)\n\n# A tibble: 6 × 8\n  species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n  &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n1 Adelie  Torgersen           39.1          18.7               181        3750\n2 Adelie  Torgersen           39.5          17.4               186        3800\n3 Adelie  Torgersen           40.3          18                 195        3250\n4 Adelie  Torgersen           NA            NA                  NA          NA\n5 Adelie  Torgersen           36.7          19.3               193        3450\n6 Adelie  Torgersen           39.3          20.6               190        3650\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\n\n# Optional: force penguins to appear in your environment:\npenguins &lt;- penguins",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#what-are-tibbles",
+    "href": "tidy-demo-palmerpenguins.html#what-are-tibbles",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "stuff goes here!",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#select-columns",
+    "href": "tidy-demo-palmerpenguins.html#select-columns",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "Columns use select() function\n\npenguins |&gt;\n  select(species, island, body_mass_g)\n\n# A tibble: 344 × 3\n   species island    body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;           &lt;int&gt;\n 1 Adelie  Torgersen        3750\n 2 Adelie  Torgersen        3800\n 3 Adelie  Torgersen        3250\n 4 Adelie  Torgersen          NA\n 5 Adelie  Torgersen        3450\n 6 Adelie  Torgersen        3650\n 7 Adelie  Torgersen        3625\n 8 Adelie  Torgersen        4675\n 9 Adelie  Torgersen        3475\n10 Adelie  Torgersen        4250\n# ℹ 334 more rows",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#filter-rows",
+    "href": "tidy-demo-palmerpenguins.html#filter-rows",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "Rows use filter() function\n\npenguins |&gt;\n  filter(body_mass_g &gt; 4000)\n\n# A tibble: 172 × 8\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.2          19.6               195        4675\n 2 Adelie  Torgersen           42            20.2               190        4250\n 3 Adelie  Torgersen           34.6          21.1               198        4400\n 4 Adelie  Torgersen           42.5          20.7               197        4500\n 5 Adelie  Torgersen           46            21.5               194        4200\n 6 Adelie  Dream               39.2          21.1               196        4150\n 7 Adelie  Dream               39.8          19.1               184        4650\n 8 Adelie  Dream               44.1          19.7               196        4400\n 9 Adelie  Dream               39.6          18.8               190        4600\n10 Adelie  Dream               42.3          21.2               191        4150\n# ℹ 162 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#create-new-columns",
+    "href": "tidy-demo-palmerpenguins.html#create-new-columns",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "penguins |&gt;\n  mutate(body_mass_kg = body_mass_g / 1000)\n\n# A tibble: 344 × 9\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.1          18.7               181        3750\n 2 Adelie  Torgersen           39.5          17.4               186        3800\n 3 Adelie  Torgersen           40.3          18                 195        3250\n 4 Adelie  Torgersen           NA            NA                  NA          NA\n 5 Adelie  Torgersen           36.7          19.3               193        3450\n 6 Adelie  Torgersen           39.3          20.6               190        3650\n 7 Adelie  Torgersen           38.9          17.8               181        3625\n 8 Adelie  Torgersen           39.2          19.6               195        4675\n 9 Adelie  Torgersen           34.1          18.1               193        3475\n10 Adelie  Torgersen           42            20.2               190        4250\n# ℹ 334 more rows\n# ℹ 3 more variables: sex &lt;fct&gt;, year &lt;int&gt;, body_mass_kg &lt;dbl&gt;",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#summarise-and-group-by",
+    "href": "tidy-demo-palmerpenguins.html#summarise-and-group-by",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "tend to use together\ngroup_by() doesn’t change the data immediately — it just tells R how to organise it.\nfirst this is what group by does\n\npenguins_grouped &lt;- penguins |&gt;\n  group_by(species)\npenguins_grouped\n\n# A tibble: 344 × 8\n# Groups:   species [3]\n   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g\n   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;\n 1 Adelie  Torgersen           39.1          18.7               181        3750\n 2 Adelie  Torgersen           39.5          17.4               186        3800\n 3 Adelie  Torgersen           40.3          18                 195        3250\n 4 Adelie  Torgersen           NA            NA                  NA          NA\n 5 Adelie  Torgersen           36.7          19.3               193        3450\n 6 Adelie  Torgersen           39.3          20.6               190        3650\n 7 Adelie  Torgersen           38.9          17.8               181        3625\n 8 Adelie  Torgersen           39.2          19.6               195        4675\n 9 Adelie  Torgersen           34.1          18.1               193        3475\n10 Adelie  Torgersen           42            20.2               190        4250\n# ℹ 334 more rows\n# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;\n\n\nthen this is summarise:\n\npenguins_grouped |&gt;\n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass = mean(body_mass_g, na.rm = TRUE),\n    n = n()\n  )\n\n# A tibble: 3 × 4\n  species   mean_flipper mean_mass     n\n  &lt;fct&gt;            &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;\n1 Adelie            190.     3701.   152\n2 Chinstrap         196.     3733.    68\n3 Gentoo            217.     5076.   124\n\n\nIn practice, you’ll often combine them in one pipeline:\n\npenguins |&gt;\n  group_by(species) |&gt;\n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass = mean(body_mass_g, na.rm = TRUE)\n  )\n\n# A tibble: 3 × 3\n  species   mean_flipper mean_mass\n  &lt;fct&gt;            &lt;dbl&gt;     &lt;dbl&gt;\n1 Adelie            190.     3701.\n2 Chinstrap         196.     3733.\n3 Gentoo            217.     5076.",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  },
+  {
+    "objectID": "tidy-demo-palmerpenguins.html#putting-it-all-together",
+    "href": "tidy-demo-palmerpenguins.html#putting-it-all-together",
+    "title": "🐧 Palmer Penguins demo using dplyr",
+    "section": "",
+    "text": "Above we did each manipulation step by step. But eh beauty of dplyr and using teh pipe is puttign it altogether in one line of code.\nAllows us to avoid making a new object for each step.\n\n# Select only relevant columns\n# Filter to include only penguins heavier than 4000 g\n# Create a new column converting grams to kilograms\n# Group data by species\n# Summarise the grouped data\n\npenguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    n = n()\n  )   \n\n# A tibble: 3 × 4\n  species   mean_flipper mean_mass_kg     n\n  &lt;fct&gt;            &lt;dbl&gt;        &lt;dbl&gt; &lt;int&gt;\n1 Adelie            195.         4.35    35\n2 Chinstrap         203.         4.27    15\n3 Gentoo            217.         5.09   122\n\n\nLastly, lets visualise it!\n\nlibrary(ggplot2)\n\npenguins_summary &lt;- penguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    n = n()\n  )\n\nggplot(penguins_summary, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  labs(title = \"Mean body mass of penguins by species\",\n       y = \"Mean body mass (kg)\", x = \"Species\") +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nOur bar plot looks ok, but we don’t have any error bars. Lets do some more data manipulation to get standard deviation and standard error.\nNote, we need to use our original penguins dataset here, as we are goign to calucate the….\n\npenguins_summary_stats &lt;- penguins |&gt;\n  select(species, island, flipper_length_mm, body_mass_g) |&gt; \n  filter(body_mass_g &gt; 4000) |&gt;   \n  mutate(body_mass_kg = body_mass_g / 1000) |&gt; \n  group_by(species) |&gt;   \n  summarise(\n    mean_mass_kg = mean(body_mass_kg, na.rm = TRUE),\n    sd_mass_kg   = sd(body_mass_kg, na.rm = TRUE),   # standard deviation\n    n            = n(),\n    se_mass_kg   = sd_mass_kg / sqrt(n)             # standard error\n  )\n\nNow replot:\n\nggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean_mass_kg - se_mass_kg,\n                    ymax = mean_mass_kg + se_mass_kg),\n                width = 0.2) +  # width of error bar caps\n  labs(title = \"Mean Body Mass of Penguins with SE\",\n       y = \"Mean Body Mass (kg)\", x = \"\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlot with SD instead\n\n\n\n\n\n\nggplot(penguins_summary_stats, aes(x = species, y = mean_mass_kg, fill = species)) +\n  geom_col() +\n  geom_errorbar(aes(ymin = mean_mass_kg - sd_mass_kg,\n                    ymax = mean_mass_kg + sd_mass_kg),\n                width = 0.2) +  # width of error bar caps\n  labs(title = \"Mean Body Mass of Penguins with SD\",\n       y = \"Mean Body Mass (kg)\", x = \"\") +\n  theme_minimal() +\n  theme(legend.position = \"none\")",
+    "crumbs": [
+      "Penguins tidy demo"
+    ]
+  }
+]
