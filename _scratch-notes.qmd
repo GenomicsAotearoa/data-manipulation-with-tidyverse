@@ -13,6 +13,12 @@ should focus on using genomic data
 -edna
 -variant calling/snps
 
+wrangling data - dealing with NAs. reformattign columns. checking no coercion. sanity checks. 
+
+
+pivot longer pivot wider
+
+
 packages
 
 dplyr

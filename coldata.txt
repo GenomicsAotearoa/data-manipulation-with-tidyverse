@@ -1,0 +1,13 @@
+sample	sex_stage	sex_category	condition 	tissue
+52G.rsem_out	F	Female	C	gonad
+114G.rsem_out	F	Female	C	gonad
+118G.rsem_out	F	Female	C	gonad
+21.rsem_out	TPmale	Male	C	gonad
+23.rsem_out	TPmale	Male	C	gonad
+27.rsem_out	TPmale	Male	C	gonad
+04.rsem_out	S3	Transitioning	T	gonad
+08.rsem_out	S3	Transitioning	T	gonad
+38.rsem_out	S3	Transitioning	T	gonad
+07.rsem_out	S4	Transitioning	T	gonad
+10.rsem_out	S4	Transitioning	T	gonad
+11.rsem_out	S4	Transitioning	T	gonad
